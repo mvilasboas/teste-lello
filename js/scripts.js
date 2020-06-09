@@ -19,6 +19,8 @@ const baseAPI_URL = 'https://api.github.com';
 window.addEventListener('load', async () => {
   mapDOMElements();
   await getAllAngularembers();
+  keyupEvent();
+  buttonEvent();
 });
 
 function mapDOMElements() {
@@ -109,4 +111,37 @@ function renderInfoPanel(info) {
     <li>Data de entrada GitHub: <span class="bold">${signupDate}</span></li>
   </ul>
   `;
+}
+
+function buttonEvent() {
+  buttonSearch.addEventListener('click', () => {
+    const typedLogin = inputSearch.value;
+
+    filterMembers(typedLogin);
+  });
+}
+
+//Valida se há dado inputado para filtrar através da ação da tecla 'Enter'
+function keyupEvent() {
+  inputSearch.addEventListener('keyup', (event) => {
+    const currentKey = event.key;
+    const typedLogin = event.target.value;
+
+    if (currentKey !== 'Enter') return;
+
+    filterMembers(typedLogin);
+  })
+}
+
+//Valida se há dado inputado para filtrar busca através do botão de busca
+function filterMembers(typedLogin) {
+  if (typedLogin.trim() == '') {
+    getAllAngularembers();
+  }
+
+  let filteredMembers = members.filter((member) => {
+    return member.login.toLowerCase().includes(typedLogin.toLowerCase());
+  }) ;
+
+  renderMembersPanel(filteredMembers);
 }
