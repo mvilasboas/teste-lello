@@ -28,7 +28,11 @@ function mapDOMElements() {
   panelInfo = document.querySelector('#panelInfo');
 }
 
-//Método para busca de membros Angular do GitHub utilizando Promise
+/* 
+Método para busca de membros Angular do GitHub utilizando Promise
+Params: none;
+Return: array de membros mapeados
+*/
 async function getAllAngularembers() {
   await fetch(`${baseAPI_URL}/orgs/angular/public_members`)
     .then((res) => {
@@ -74,4 +78,35 @@ function renderMembersPanel(members) {
 
   panelMembers.appendChild(h5);
   panelMembers.appendChild(ul);
+}
+
+/* 
+Método para busca de membro Angular do GitHub utilizando async/await
+Params: login;
+Return: array de informações do membro
+*/
+async function getMemberInfo(member) {
+  try {
+    const res = await fetch(`${baseAPI_URL}/users/${member}`);
+    renderInfoPanel(await res.json())
+  } catch (error) {
+    console.error(`Falha na requisição de getMemberInfo(): ${error.message}`);
+  }
+}
+
+function renderInfoPanel(info) {
+  const {name, public_repos, followers, created_at} = info;
+
+  let signupDate = new Date(created_at);
+  signupDate = new Intl.DateTimeFormat('pt-BR').format(signupDate);
+
+  panelInfo.innerHTML = `
+  <h5>Informações</h5>
+  <ul>
+    <li>Nome do membro: <span class="bold">${name || null ? name : 'Não informado'}</span></li>
+    <li>Quantidade de repositórios: <span class="bold">${public_repos}</span></li>
+    <li>Quantidade de seguidores: <span class="bold">${followers}</span></li>
+    <li>Data de entrada GitHub: <span class="bold">${signupDate}</span></li>
+  </ul>
+  `;
 }
