@@ -12,6 +12,30 @@
     <title></title>
   </head>
   <body>
+    <div class="container">
+      <h2 class="center">Lista de membros Angular do GitHub</h2>
+      <br>
+      <div class="flex-row">
+        <div class="input-field inputSearch">
+          <input type="text" id="inputSearch" class="validate" />
+          <label for="inputSearch">Busca por login</label> 
+        </div>
+        <div class="inputButton">
+          <button id="buttonSearch" type="button" class="waves-effect waves-light btn">Buscar</button>
+        </div>
+      </div>
+      <br>
+      <div class="flex-col">
+        <div class="board" id="panelMembers">
+          <h5 class="label">Nenhum usuário</h5>
+        </div>
+        <div class="board" id="panelInfo">
+          <h5 class="label">Informações</h5>
+        </div>
+      </div>
+    </div>
+
+
     <!-- Materialize Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./js/scripts.js"></script>
