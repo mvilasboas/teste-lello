@@ -13,7 +13,8 @@ let inputSearch,
   panelMembers,
   panelInfo,
   divSpinner,
-  divHidden = null;
+  divHidden,
+  divError = null;
 let members = [];
 
 const baseAPI_URL = 'https://api.github.com';
@@ -31,8 +32,9 @@ function mapDOMElements() {
   buttonSearch = document.querySelector('#buttonSearch');
   panelMembers = document.querySelector('#panelMembers');
   panelInfo = document.querySelector('#panelInfo');
-  divSpinner = document.querySelector("#spinner");
-  divHidden = document.querySelector("#hidden");
+  divSpinner = document.querySelector('#spinner');
+  divHidden = document.querySelector('#hidden');
+  divError = document.querySelector('#error');
 }
 
 /* 
@@ -44,8 +46,7 @@ async function getAllAngularembers() {
   await fetch(`${baseAPI_URL}/orgs/angular/public_members`)
     .then((res) => {
       res.json().then((data) => {
-        members = data
-          .map(({ id, login, avatar_url, url }) => {
+        members = data.map(({ id, login, avatar_url, url }) => {
             return {
               id: id,
               login: login,
@@ -95,14 +96,14 @@ Return: array de informações do membro
 async function getMemberInfo(member) {
   try {
     const res = await fetch(`${baseAPI_URL}/users/${member}`);
-    renderInfoPanel(await res.json())
+    renderInfoPanel(await res.json());
   } catch (error) {
     console.error(`Falha na requisição de getMemberInfo(): ${error.message}`);
   }
 }
 
 function renderInfoPanel(info) {
-  const {name, public_repos, followers, created_at} = info;
+  const { name, public_repos, followers, created_at } = info;
 
   let signupDate = new Date(created_at);
   signupDate = new Intl.DateTimeFormat('pt-BR').format(signupDate);
@@ -110,7 +111,9 @@ function renderInfoPanel(info) {
   panelInfo.innerHTML = `
   <h5>Informações</h5>
   <ul>
-    <li>Nome do membro: <span class="bold">${name || null ? name : 'Não informado'}</span></li>
+    <li>Nome do membro: <span class="bold">${
+      name || null ? name : 'Não informado'
+    }</span></li>
     <li>Quantidade de repositórios: <span class="bold">${public_repos}</span></li>
     <li>Quantidade de seguidores: <span class="bold">${followers}</span></li>
     <li>Data de entrada GitHub: <span class="bold">${signupDate}</span></li>
@@ -122,6 +125,10 @@ function buttonEvent() {
   buttonSearch.addEventListener('click', () => {
     const typedLogin = inputSearch.value;
 
+    typedLogin
+      ? divError.classList.add('hidden')
+      : divError.classList.remove('hidden');
+
     filterMembers(typedLogin);
   });
 }
@@ -132,10 +139,13 @@ function keyupEvent() {
     const currentKey = event.key;
     const typedLogin = event.target.value;
 
+    typedLogin
+      ? divError.classList.add('hidden')
+      : divError.classList.remove('hidden');
     if (currentKey !== 'Enter') return;
 
     filterMembers(typedLogin);
-  })
+  });
 }
 
 //Valida se há dado inputado para filtrar busca através do botão de busca
@@ -146,7 +156,7 @@ function filterMembers(typedLogin) {
 
   let filteredMembers = members.filter((member) => {
     return member.login.toLowerCase().includes(typedLogin.toLowerCase());
-  }) ;
+  });
 
   renderMembersPanel(filteredMembers);
 }
