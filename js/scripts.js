@@ -111,9 +111,7 @@ function renderInfoPanel(info) {
   panelInfo.innerHTML = `
   <h5>Informações</h5>
   <ul>
-    <li>Nome do membro: <span class="bold">${
-      name || null ? name : 'Não informado'
-    }</span></li>
+    <li>Nome do membro: <span class="bold">${name || null ? name : 'Não informado'}</span></li>
     <li>Quantidade de repositórios: <span class="bold">${public_repos}</span></li>
     <li>Quantidade de seguidores: <span class="bold">${followers}</span></li>
     <li>Data de entrada GitHub: <span class="bold">${signupDate}</span></li>
@@ -125,9 +123,7 @@ function buttonEvent() {
   buttonSearch.addEventListener('click', () => {
     const typedLogin = inputSearch.value;
 
-    typedLogin
-      ? divError.classList.add('hidden')
-      : divError.classList.remove('hidden');
+    typedLogin ? divError.classList.add('hidden') : divError.classList.remove('hidden');
 
     filterMembers(typedLogin);
   });

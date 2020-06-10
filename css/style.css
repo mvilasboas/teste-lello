@@ -57,6 +57,9 @@ li {
 .clickable {
   cursor: pointer;
 }
+  .clickable:hover {
+    background-color: #f2f2f2;
+  }
 
 .bold {
   font-weight: bold;
