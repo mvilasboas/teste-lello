@@ -1,0 +1,80 @@
+body {
+  font-family: Consolas;
+  background-color: #f2f2f2;
+  padding: 30px;
+}
+
+.center {
+  text-align: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.inputSearch {
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  width: 90%;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.board {
+  background-color: #fff;
+  border: 2px solid lightgray;
+  border-radius: 4px;
+  width: 45%;
+  height: 350px;
+  margin-top: 20px;
+  padding: 10px;
+  overflow-x: auto;
+}
+
+img {
+  border-radius: 100%;
+  max-width: 40px;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+  .clickable:hover {
+    background-color: #f2f2f2;
+  }
+
+.bold {
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+#error {
+  margin-top: -20px;
+  font-size: 1rem;
+  color: red;
+}
+
+.hint {
+  font-size: 12px;
+}

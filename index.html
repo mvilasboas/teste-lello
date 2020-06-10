@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- Materialize Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <title>Lello - Teste JavaScript</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="center">Lista de membros Angular do GitHub</h2>
+      <br />
+      <div id="spinner" class="flex-row flex-center">
+        <div class="center preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        <span style="margin-left: 15px; font-size: 1.5rem;">Aguarde...</span>
+      </div>
+
+      <div id="hidden" class="hidden">
+        <div class="flex-row">
+          <div class="input-field inputSearch">
+            <input type="text" id="inputSearch" class="validate" />
+            <label for="inputSearch">Busca por login</label>
+          </div>
+          <div class="inputButton">
+            <button id="buttonSearch" type="button" class="waves-effect waves-light btn">
+              Buscar
+            </button>
+          </div>
+        </div>
+        <div id="error" class="inputSearch error hidden">
+          <span class="hint">Informe o login ou parte dele para busca</span>
+        </div>
+        <br />
+        <div class="flex-col">
+          <div class="board" id="panelMembers">
+            <h5 class="label">Nenhum usuário</h5>
+          </div>
+          <div class="board" id="panelInfo">
+            <h5 class="label">Informações</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Materialize Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./js/scripts.js"></script>
+  </body>
+</html>
