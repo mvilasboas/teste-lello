@@ -28,6 +28,10 @@ body {
   justify-content: space-evenly;
 }
 
+.flex-center {
+  justify-content: center;
+}
+
 .board {
   background-color: #fff;
   border: 2px solid lightgray;
@@ -56,4 +60,8 @@ li {
 
 .bold {
   font-weight: bold;
+}
+
+.hidden {
+  display: none;
 }

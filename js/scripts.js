@@ -11,7 +11,9 @@ Data: 09/06/2020
 let inputSearch,
   buttonSearch,
   panelMembers,
-  panelInfo = null;
+  panelInfo,
+  divSpinner,
+  divHidden = null;
 let members = [];
 
 const baseAPI_URL = 'https://api.github.com';
@@ -21,6 +23,7 @@ window.addEventListener('load', async () => {
   await getAllAngularembers();
   keyupEvent();
   buttonEvent();
+  showSearch();
 });
 
 function mapDOMElements() {
@@ -28,6 +31,8 @@ function mapDOMElements() {
   buttonSearch = document.querySelector('#buttonSearch');
   panelMembers = document.querySelector('#panelMembers');
   panelInfo = document.querySelector('#panelInfo');
+  divSpinner = document.querySelector("#spinner");
+  divHidden = document.querySelector("#hidden");
 }
 
 /* 
@@ -144,4 +149,11 @@ function filterMembers(typedLogin) {
   }) ;
 
   renderMembersPanel(filteredMembers);
+}
+
+function showSearch() {
+  setTimeout(() => {
+    divSpinner.classList.add('hidden');
+    divHidden.classList.remove('hidden');
+  }, 2000);
 }
